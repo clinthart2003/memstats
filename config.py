@@ -36,21 +36,7 @@ class CONFIG:
 
     TQUSER = ['threatq@threatq.com', 'ChangeMePlease!']   # Mainly used for initial login and ldap.py setup
 
-    # USER = ['davea@threatq.com', 'ChangeMePlease!']  # Secure SAML login user.
-
-    # USER = ['tanuj@threatq.com', 'ChangeMePlease!']  # Secure SAML login user.
-
-    # USER = ['Super@threatq.com', 'threatquotientthreatquotient']   # Secure Openldap login user.
-
-    # USER = ['stratum@stratumsecurity.com', 'HZfgSAcMPQG5RiG26gwVQFbca']  # Secure ldap login user.
-
     USER = ['threatq@threatq.com', 'ChangeMePlease!']  #Default TQ system user
-
-    # USER = ['maintenance', 'ChangeMePlease!']  # non-secure ldap user.
-
-    # USER = ['contributor', 'ChangeMePlease!']  # non-secure ldap user.
-
-    # USER = ['tqadmin', 'ChangeMePlease!']  # non-secure ldap user.
 
     users = [
              ["Adversary Reader", "ChangeMePlease!", "threatq2@threatq.com", "Administrative Access", "Adversary Reader Process"],
