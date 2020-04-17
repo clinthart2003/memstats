@@ -32,9 +32,9 @@ class CONFIG:
 
     HOST = 'https://' + server + '/'             # Used primarily for all scripts
 
-    TIEHOST = 'https://364-upgrade01.threatq.com/'   # Used in ExportCSV.py
+    TIEHOST = 'https://upgrade01.threatq.com/'   # Used in ExportCSV.py
 
-    TQUSER = ['threatq@threatq.com', 'threatquotientthreatquotient']   # Mainly used for initial login and ldap.py setup
+    TQUSER = ['threatq@threatq.com', 'ChangeMePlease!']   # Mainly used for initial login and ldap.py setup
 
     # USER = ['davea@threatq.com', 'ChangeMePlease!']  # Secure SAML login user.
 
@@ -44,7 +44,7 @@ class CONFIG:
 
     # USER = ['stratum@stratumsecurity.com', 'HZfgSAcMPQG5RiG26gwVQFbca']  # Secure ldap login user.
 
-    USER = ['threatq@threatq.com', 'threatquotientthreatquotient']  #Default TQ system user
+    USER = ['threatq@threatq.com', 'ChangeMePlease!']  #Default TQ system user
 
     # USER = ['maintenance', 'ChangeMePlease!']  # non-secure ldap user.
 
@@ -68,7 +68,6 @@ class CONFIG:
              ["Super@threatq.com", "ChangeMePlease!", "Super@threatq.com", "Maintenance Account","DDoS Attack"],
              ["Analyst@threatq.com", "ChangeMePlease!", "Analyst@threatq.com", "Primary Contributor Access", "DDoS Attack"],
              ["Observer@threatq.com", "ChangeMePlease!", "Observer@threatq.com","Read Only Access", "DDoS Attack"],
-             ["yitest", "Test1234", "yitest@threatq.com", "Administrative Access", "DDoS Attack"],
              ["tanuj", "ChangeMePlease!", "tanuj@threatq.com", "Administrative Access", "DDoS Attack"],
              ["clinthart", "ChangeMePlease!", "clinthart@threatq.com", "Primary Contributor Access", "DDoS Attack"],
              ["Guest", "ChangeMePlease!", "Guest@threatq.com", "Read Only Access", "DDoS Attack"],
@@ -84,10 +83,9 @@ class CONFIG:
 
     WEBDRIVER = 'Chrome'                  # Chrome or Firefox are the possible values here.
 
-    MYSQLROOT = 'Sqk51z9ce4d8CKbudEssnhpw5HKdNqRk'
+    MYSQLROOT = 'thisismySQLrootpassword'
 
-    # MYSQLROOT = 'threatquotientthreatquotient'
+    # MYSQLROOT = 'thisismyrootpassword'
 
-    TQBACKUP = 'threatq_backup_793_2020-03-31.tgz'
+    TQBACKUP = 'threatq_backup.tgz'
 
-    # TQBACKUP = 'threatq_backup_538_2018-08-04.tgz'
