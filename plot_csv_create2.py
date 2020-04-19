@@ -30,7 +30,7 @@ def printlog(memorylog, grepname, tvalue, header):
         print "Adjusted size of tvalue: %s" % len(tvalue)
         print ("")
 
-        for i, line in map(None, tvalue, x):
+        for i, line in zip(tvalue, x):
             # Convert GiB and TiB to KiB
             if ('m' in line[4]) or ('g' in line[4]) or ('t' in line[4]) or ('p' in line[4]):
                 if 'm' in line[4]:
@@ -88,7 +88,7 @@ def printlog(memorylog, grepname, tvalue, header):
                     value = float(value) * 1024 * 1024 * 1024 * 1024
                     line[6] = int(value)
 
-        for i, line in map(None, tvalue, x):
+        for i, line in zip(tvalue, x):
             # print i
             line.insert(0, i)
             listfile.append(line)
@@ -150,7 +150,7 @@ def printlog2(memorylog, grepname, tvalue, header):
                 if 'buff/cache' in cell:
                     line[num] = cell.replace('buff/cache', '')
 
-        for i, line in map(None, tvalue, x):
+        for i, line in zip(tvalue, x):
             # print i
             line.insert(0, i)
             listfile.append(line)
