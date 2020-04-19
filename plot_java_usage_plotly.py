@@ -2,7 +2,7 @@ import csv
 import plotly
 import plotly.graph_objects as go
 from datetime import datetime
-from TQ_Setup.config import CONFIG
+from config import CONFIG
 
 tstamp = datetime.now().strftime("%Y-%m-%d")
 
@@ -38,10 +38,6 @@ def plot_topstats(file='results/memory/qa-gold01-JavaMem.csv', proc='Java'):
         y1 = []
         y2 = []
 
-        # print x
-        # print y1
-        # print y2
-
         count = 0
         t = 0
         for row in reader:
@@ -61,11 +57,6 @@ def plot_topstats(file='results/memory/qa-gold01-JavaMem.csv', proc='Java'):
                     x.append(datetime.strptime(content[0].strip(), "%m-%d-%Y %H:%M:%S"))
                 except Exception as e:
                     x.append(datetime.strptime(content[0].strip(), "%Y-%m-%d %H:%M:%S"))
-
-        # print y2
-
-        # myFmt = mdates.DateFormatter('%m-%d-%Y %H:%M:%S')
-        # ax.xaxis.set_major_formatter(myFmt)
 
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=x, y=y1, mode='lines', name='Free'))

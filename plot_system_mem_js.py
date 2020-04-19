@@ -58,16 +58,12 @@ def plot_topstats(file='TQ_Setup/results/memory/clint-test-systemd-journald.csv'
 
                 content = list(row[i] for i in ttime)
                 try:
-                    # x.append(datetime.strptime(content[0].split(' ')[1].strip(), "%H:%M:%S"))
                     x.append(datetime.strptime(content[0].strip(), "%m-%d-%Y %H:%M:%S"))
                 except Exception as e:
                     x.append(datetime.strptime(content[0].strip(), "%Y-%m-%d %H:%M:%S"))
 
-        # print y2
 
         y4 = [int(a) + int(b) for a, b in zip(y1, y3)]
-
-        # print y4
 
         y_format = tkr.FuncFormatter(func)
 
@@ -81,7 +77,6 @@ def plot_topstats(file='TQ_Setup/results/memory/clint-test-systemd-journald.csv'
         myFmt = mdates.DateFormatter('%m-%d-%Y %H:%M:%S')
         ax.xaxis.set_major_formatter(myFmt)
 
-        # ax.xaxis_date()
 
         l1 = ax.plot(x, y2, marker='.')
         l2 = ax.plot(x, y4, marker='.')

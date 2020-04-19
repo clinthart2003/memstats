@@ -2,7 +2,7 @@ import csv
 import plotly.graph_objects as go
 import plotly
 from datetime import datetime
-from TQ_Setup.config import CONFIG
+from config import CONFIG
 
 tstamp = datetime.now().strftime("%Y-%m-%d")
 
@@ -61,11 +61,7 @@ def plot_topstats(file='TQ_Setup/results/memory/clint-test-systemd-journald.csv'
                 except Exception as e:
                     x.append(datetime.strptime(content[0].strip(), "%Y-%m-%d %H:%M:%S"))
 
-        # print y2
-
         y4 = [float(a) + float(b) for a, b in zip(y1, y3)]
-
-        # print y3
 
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=x, y=y2, mode='lines', name='Used'))

@@ -71,7 +71,7 @@ def plot_topstats(infile='TQ_Setup/results/memory/clint-test-load average.csv', 
                     print ('Error with line: %d' % (count + 1))
                 count += 1
 
-        print y3
+        print (y3)
         fig, ax = plt.subplots(1)  # the first figure
         fig.set_size_inches(15, 8)
         # ax = plt.subplot()
@@ -82,16 +82,12 @@ def plot_topstats(infile='TQ_Setup/results/memory/clint-test-load average.csv', 
 
         # print y1
         l1 = ax.plot(x, y1)
-        # tt1 = plugins.PointLabelTooltip(l1[0], labels=y1)
 
         l2 = ax.plot(x, y2)
-        # tt2 = plugins.PointLabelTooltip(l2[0], labels=y2)
 
         l3 = ax.plot(x, y3)
-        # tt3 = plugins.PointLabelTooltip(l3[0], labels=y3)
 
         labels = ["1 Min", "5 Min", "15 Min"]
-
 
         line_collections = [l1, l2, l3]
         plugins.connect(fig, plugins.InteractiveLegendPlugin(line_collections, labels))
@@ -110,15 +106,3 @@ for host in CONFIG.graphhost:
 
     plot_topstats(infile='results/memory/%s-load average.csv' % host, proc='Average Load')
 
-"""
-csvfiles = [
-            ['results/memory/%s-load average.csv' % CONFIG.graphhost, proc='Average Load']
-            ]
-
-for process in csvfiles:
-
-    try:
-        plot_topstats(file=process[0], proc=process[1])
-    except Exception as e:
-        print ("There was an error generating: %s " % process[0])
-"""

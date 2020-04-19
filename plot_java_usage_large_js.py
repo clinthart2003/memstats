@@ -52,7 +52,7 @@ def plot_topstats(file='results/memory/qa-gold01-JavaMem.csv', proc='Java'):
             else:
 
                 content = list(row[i] for i in free)
-                print content
+                print (content)
                 y1.append(int(content[0].strip()))
 
                 content = list(row[i] for i in used)

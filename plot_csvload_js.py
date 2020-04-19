@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt, mpld3
 import matplotlib.dates as mdates
 from matplotlib.ticker import FormatStrFormatter
 from mpld3 import plugins
-# import collections
 from datetime import datetime
 from config import CONFIG
 import locale

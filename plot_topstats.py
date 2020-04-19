@@ -69,7 +69,6 @@ def plot_topstats(infile='results/memory/clint-test-mysqld.csv', proc='mysqld'):
         y_format = tkr.FuncFormatter(func)
 
         fig = plt.figure()  # the first figure
-        # fig.suptitle(page_title, fontsize="x-large")
         ax1 = fig.add_subplot(2,1,1)
         ax1.plot(x, y1)
         ax1.plot(x, y2)
@@ -93,7 +92,6 @@ def plot_topstats(infile='results/memory/clint-test-mysqld.csv', proc='mysqld'):
         plt.ylabel('CPU %')
         ax2.legend(["CPU %", "Mem %"], bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 
-        #ax2.autofmt_xdate()
         fig.set_size_inches(18, 30)
         plt.subplots_adjust(top=0.9, bottom=0.5, left=0.1, right=0.9, hspace=0.4)
 
@@ -103,8 +101,6 @@ def plot_topstats(infile='results/memory/clint-test-mysqld.csv', proc='mysqld'):
 
 
 # plot_topstats(infile='results/memory/%s-mysqld.csv' % CONFIG.graphhost, proc='mysqld')
-
-
 
 
 for host in CONFIG.graphhost:

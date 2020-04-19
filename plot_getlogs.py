@@ -2,9 +2,6 @@ import paramiko
 from config import CONFIG
 import time
 
-
-remotepath = "/tmp"
-
 ssh = paramiko.SSHClient()
 ssh.load_system_host_keys()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -20,7 +17,7 @@ def get_files():
     sftp = ssh.open_sftp()
     for filename in sftp.listdir('/var/log'):
         if 'threatq-memory' in filename:
-            print filename
+            print (filename)
             remotefile = remotepath + '/' + filename
             localfile = localpath + '/' + filename
             sftp.get(remotefile, localfile)

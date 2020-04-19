@@ -3,8 +3,6 @@ import os
 html_list = []
 lable_list = []
 
-
-
 def create_list():
     files = os.listdir('results/memory')
 

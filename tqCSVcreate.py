@@ -22,14 +22,14 @@ def printlog(memorylog, grepname, tvalue, header):
 
         # Look at the difference between the number of timestamps and the
         # number of records that were collected
-        print grepname
-        print "Total grepped lines: %s" % len(x)
-        print "Total Time Values: %s" % len(tvalue)
+        print(grepname)
+        print("Total grepped lines: %s" % len(x))
+        print("Total Time Values: %s" % len(tvalue))
         orig_tvalue = tvalue
         if len(x) < len(tvalue):
             while len(x) != len(tvalue):
                 tvalue.pop()
-        print "Adjusted size of tvalue: %s" % len(tvalue)
+        print("Adjusted size of tvalue: %s" % len(tvalue))
         print ("")
 
         for i,line in map(None, tvalue, x):
@@ -89,14 +89,14 @@ def printlog2(memorylog, grepname, tvalue, header):
 
         # Look at the difference between the number of timestamps and the
         # number of records that were collected
-        print grepname
-        print "Total grepped lines: %s" % len(x)
-        print "Total Time Values: %s" % len(tvalue)
+        print(grepname)
+        print("Total grepped lines: %s" % len(x))
+        print("Total Time Values: %s" % len(tvalue))
         orig_tvalue = tvalue
         if len(x) < len(tvalue):
             while len(x) != len(tvalue):
                 tvalue.pop()
-        print "Adjusted size of tvalue: %s" % len(tvalue)
+        print("Adjusted size of tvalue: %s" % len(tvalue))
         print ("")
 
         for line in x:
@@ -184,23 +184,6 @@ def grep_time(cmd):
             memorylog.append(line.strip('\n'))
 
     return memorylog
-
-"""
-depricated for ssh accessing directly from server 
-def grep_memoryfile(infile, grepstring, skipstring):
-    memorylog = []
-    with open(infile, 'r') as f:
-        for line in f.readlines():
-            if grepstring in line:
-                if skipstring in line:
-                    continue
-                else:
-                    memorylog.append(line.strip('\n'))
-            else:
-                continue
-
-    return memorylog
-"""
 
 
 def main():

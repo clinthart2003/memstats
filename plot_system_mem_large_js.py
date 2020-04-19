@@ -58,16 +58,11 @@ def plot_topstats(file='TQ_Setup/results/memory/clint-test-systemd-journald.csv'
 
                 content = list(row[i] for i in ttime)
                 try:
-                    # x.append(datetime.strptime(content[0].split(' ')[1].strip(), "%H:%M:%S"))
                     x.append(datetime.strptime(content[0].strip(), "%m-%d-%Y %H:%M:%S"))
                 except Exception as e:
                     x.append(datetime.strptime(content[0].strip(), "%Y-%m-%d %H:%M:%S"))
 
-        # print y2
-
         y4 = [int(a) + int(b) for a, b in zip(y1, y3)]
-
-        # print y4
 
         y_format = tkr.FuncFormatter(func)
 
@@ -75,13 +70,9 @@ def plot_topstats(file='TQ_Setup/results/memory/clint-test-systemd-journald.csv'
         fig.set_size_inches(17, 8)
         plt.subplots_adjust(top=0.9, bottom=0.1, left=0.1, right=0.9, hspace=0.3)
         ax = plt.subplot()
-        # ax.plot(x, y2)
-        # ax.plot(x, y4)
         ax.yaxis.set_major_formatter(y_format)
         myFmt = mdates.DateFormatter('%m-%d-%Y %H:%M:%S')
         ax.xaxis.set_major_formatter(myFmt)
-
-        # ax.xaxis_date()
 
         l1 = ax.plot(x, y2)
         l2 = ax.plot(x, y4)
@@ -95,8 +86,6 @@ def plot_topstats(file='TQ_Setup/results/memory/clint-test-systemd-journald.csv'
         for i, s in enumerate(y4):
             ttvalues2.append(format(s, ','))
 
-        # tt1 = plugins.PointLabelTooltip(l1[0], labels=ttvalues1)
-        # tt2 = plugins.PointLabelTooltip(l2[0], labels=ttvalues2)
         ax.set_title('%s: %s ' % (host, proc))
         plt.title('System Memory')
         plt.ylabel('Memory (KiB)')

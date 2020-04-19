@@ -2,7 +2,6 @@ import csv
 import plotly
 import plotly.graph_objects as go
 import matplotlib.dates as mdates
-# import collections
 from datetime import datetime
 from config import CONFIG
 import locale
@@ -53,7 +52,7 @@ def plot_topstats(infile='TQ_Setup/results/memory/clint-test-load average.csv', 
                 content = list(row[i] for i in included_col3)
                 y3.append((float(content[0].strip())))
                 content = list(row[i] for i in included_col0)
-                # print content[0].strip()
+
                 try:
                     x.append(datetime.strptime(content[0].strip(), "%Y-%m-%d %H:%M:%S"))
                 except Exception as e:

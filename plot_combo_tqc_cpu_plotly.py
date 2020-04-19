@@ -2,7 +2,7 @@ import csv
 import plotly.graph_objects as go
 import plotly
 from datetime import datetime
-from TQ_Setup.config import CONFIG
+from config import CONFIG
 import locale
 locale.setlocale(locale.LC_ALL, '')
 
@@ -93,27 +93,18 @@ def plot_combo(csvfiles, host):
 
         if file_number == 4:
             y4 = y
-            x4 = x
             # print file_number
         elif file_number == 3:
             y3 = y
-            x3 = x
             # print file_number
             file_number += 1
         elif file_number == 2:
             y2 = y
-            x2 = x
             # print file_number
             file_number += 1
         else:
             y1 = y
-            x1 = x
-            # print file_number
             file_number += 1
-
-    # labels1 = ["Avg CPU", "TQController", "TQ-Supervisord", "Dynamo"]
-
-    # print (y1)
 
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=x, y=y1, mode='lines', name='1 Min Avg Load'))

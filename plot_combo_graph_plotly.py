@@ -8,6 +8,17 @@ locale.setlocale(locale.LC_ALL, '')
 
 tstamp = datetime.now().strftime("%Y-%m-%d")
 
+x1 = []
+y1 = []
+x2 = []
+y2 = []
+x3 = []
+y3 = []
+x4 = []
+y4 = []
+x5 = []
+y5 = []
+
 def func(x, pos):  # format function takes tick label and tick position
     s = '%d' % x
     groups = []
@@ -39,7 +50,6 @@ def plot_combo(csvfiles, host):
             ttime = [0]
             res = [6]
 
-
             count = 0
             for row in reader:
                 if count == 0:
@@ -57,35 +67,19 @@ def plot_combo(csvfiles, host):
         csvfile.close()
         if file_number == 5:
             y5 = y
-            x5 = x
-
             file_number += 1
         elif file_number == 4:
             y4 = y
-            x4 = x
-
             file_number += 1
         elif file_number == 3:
             y3 = y
-            x3 = x
-
             file_number += 1
         elif file_number == 2:
             y2 = y
-            x2 = x
-
             file_number += 1
         else:
             y1 = y
-            x1 = x
-
             file_number += 1
-
-    # y_format = tkr.FuncFormatter(func)
-
-    #labels1 = ["MySQL", "Solr", "Journald", "Dynamo", "tqcontroller"]
-    #line_collections1 = [l1, l2, l3, l4, l5]
-
 
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=x, y=y2, mode='lines', name='Solr'))
@@ -115,16 +109,5 @@ for host in CONFIG.graphhost:
                 ['results/memory/%s-dynamo.csv' % host, 'dynamo'],
                 ['results/memory/%s-tqcontroller.csv' % host, 'tqcontroller']
                 ]
-
-    x1 = []
-    y1 = []
-    x2 = []
-    y2 = []
-    x3 = []
-    y3 = []
-    x4 = []
-    y4 = []
-    x5 = []
-    y5 = []
 
     plot_combo(csvfiles, host)

@@ -3,7 +3,7 @@ import plotly
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from datetime import datetime
-from TQ_Setup.config import CONFIG
+from config import CONFIG
 
 tstamp = datetime.now().strftime("%Y-%m-%d")
 
@@ -67,8 +67,6 @@ def plot_topstats(infile, proc):
                 except Exception as e:
                     x.append(datetime.strptime(content[0].strip(), "%Y-%m-%d %H:%M:%S"))
 
-        # y_format = tkr.FuncFormatter(func)
-
         fig = make_subplots(rows=2, cols=1,
                             subplot_titles=("Memory (GiB)","% CPU Usage"))
         fig.add_trace(go.Scatter(x=x, y=y1, mode='lines', name='Reserved'), row=1, col=1)
@@ -89,7 +87,6 @@ def plot_topstats(infile, proc):
             width=1000
                         )
 
-        # fig.show()
         plotly.offline.plot(fig, filename="results/memory/%s_%s_%s.html" % (host, proc, tstamp), auto_open=False)
 
 
