@@ -24,7 +24,7 @@ def plot_topstats(infile, proc):
 
         for line in csvfile.readlines():
             # get number of columns
-            print(line)
+            # print(line)
             array = line.split(',')
             first_item = array[0]
 

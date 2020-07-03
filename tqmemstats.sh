@@ -12,14 +12,18 @@ echo $NOWT
 
 while true; do
 
-    # Add metrics to logs in /var/log dir
+    # Add date stamp and metrics to logs in /var/log dir
+         #TOP stats and snapshot timestamp
     echo "DATE:$(date +"%Y-%m-%d %T")" | tee -a /var/log/$FILENAME.log
     echo "$(top -b -w150 -o +%MEM | head -n 75)"  |  tee -a /var/log/$FILENAME.log
+         #Collect and sum httpd processes and output aggregate
     echo $" " | tee -a /var/log/$FILENAME.log
     echo "$(python /root/pymem.py)" | tee -a /var/log/$FILENAME.log
+         #Collect HDD metrics
     echo $" " | tee -a /var/log/$FILENAME.log
     echo "$(iostat -dx)" | tee -a /var/log/$FILENAME.log
     echo $" " | tee -a /var/log/$FILENAME.log
+         #Collect solr JAVA memory usage and add timestamp
     echo "DATE:$(date +"%Y-%m-%d %T")" | tee -a /var/log/$FILENAME-jvm.log
     echo "$(curl localhost:8983/solr/admin/info/system?wt=json | python -mjson.tool)" | tee -a /var/log/$FILENAME-jvm.log
     sleep 60
