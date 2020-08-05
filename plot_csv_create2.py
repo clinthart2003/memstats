@@ -20,15 +20,18 @@ def printlog(memorylog, grepname, tvalue, header):
 
         # Look at the difference between the number of timestamps and the
         # number of records that were collected
-        print grepname
-        print "Total grepped lines: %s" % len(x)
-        print "Total Time Values: %s" % len(tvalue)
+        print(grepname)
+        print("Total grepped lines: %s" % len(x))
+        print("Total Time Values: %s" % len(tvalue))
         orig_tvalue = tvalue
         if len(x) < len(tvalue):
             while len(x) != len(tvalue):
-                tvalue.pop()
-        print "Adjusted size of tvalue: %s" % len(tvalue)
-        print ("")
+                ''' Change pop() to pop(0) to remove the first value
+                    in the list 
+                '''
+                tvalue.pop(0)
+        print("Adjusted size of tvalue: %s" % len(tvalue))
+        print("")
 
         for i, line in zip(tvalue, x):
             # Convert GiB and TiB to KiB
@@ -97,14 +100,14 @@ def printlog(memorylog, grepname, tvalue, header):
         temp = []
         for line in listfile:
             if (line[0] is None) or ('"' in line[0]) or ('"' in line) or (len(line[0]) == 0) or ('bash' in line[1]):
-                print line
+                print(line)
             else:
                 temp.append(line)
         tmp = sorted(temp, key=lambda x: datetime.datetime.strptime(x[0], '%Y-%m-%d %H:%M:%S'))
         tmp.insert(0, header)
         for line in tmp:
             if (line[0] is None) or ('"' in line[0]) or ('"' in line) or (len(line[0]) == 0) or ('bash' in line[1]):
-                print line
+                print(line)
             else:
                 # wr = csv.writer(f)
                 wr.writerow(line)
@@ -121,15 +124,15 @@ def printlog2(memorylog, grepname, tvalue, header):
 
         # Look at the difference between the number of timestamps and the
         # number of records that were collected
-        print grepname
-        print "Total grepped lines: %s" % len(x)
-        print "Total Time Values: %s" % len(tvalue)
+        print(grepname)
+        print("Total grepped lines: %d") % len(x)
+        print("Total Time Values: %d") % len(tvalue)
         orig_tvalue = tvalue
         if len(x) < len(tvalue):
             while len(x) != len(tvalue):
-                tvalue.pop()
-        print "Adjusted size of tvalue: %s" % len(tvalue)
-        print ("")
+                tvalue.pop(0)
+        print("Adjusted size of tvalue: %d") % len(tvalue)
+        print("")
 
         for line in x:
             for num, cell in enumerate(line):
@@ -159,14 +162,14 @@ def printlog2(memorylog, grepname, tvalue, header):
         temp = []
         for line in listfile:
             if (line[0] is None) or ('"' in line[0]) or ('"' in line) or (len(line[0]) == 0) or ('bash' in line[1]):
-                print line
+                print(line)
             else:
                 temp.append(line)
         tmp = sorted(temp, key=lambda x: datetime.datetime.strptime(x[0], '%Y-%m-%d %H:%M:%S'))
         tmp.insert(0, header)
         for line in tmp:
             if (line[0] is None) or ('"' in line[0]) or ('"' in line) or (len(line[0]) == 0) or ('bash' in line[1]):
-                print line
+                print(line)
             else:
                 # wr = csv.writer(f)
                 wr.writerow(line)
@@ -205,7 +208,7 @@ def grep_memory2(cmd, skipstring):
                 line = ','.join(line.split('total,'))
                 # line = ','.join(line.split())
                 line = ','.join(line.split(',,'))
-                # print (line)
+                # print(line)
                 memorylog.append(line.strip('\n'))
 
     return memorylog
@@ -247,7 +250,7 @@ for host in CONFIG.graphhost:
 
     connection = False
 
-    print host
+    print(host)
 
     ssh = paramiko.SSHClient()
     ssh.load_system_host_keys()
@@ -257,7 +260,7 @@ for host in CONFIG.graphhost:
         ssh.connect(host, username=CONFIG.username)
         connection = True
     except Exception as e:
-        print ("ssh connection to %s failed, skipping data collect attempts" % host)
+        print("ssh connection to %s failed, skipping data collect attempts" % host)
 
     if connection is True:
 
@@ -270,7 +273,7 @@ for host in CONFIG.graphhost:
             printlog(tqcontroller, 'tqcontroller', tvalue, header)
 
         except Exception as e:
-            print ("Error generating graph for: %s " % host)
+            print("Error generating graph for: %s " % host)
 
         try:
             cmd = r'cat %s/threatq-memory-%s.log | grep "DATE:"' % (remotepath, host)
@@ -281,7 +284,7 @@ for host in CONFIG.graphhost:
             printlog(tqcontroller, 'tq-supervisord', tvalue, header)
 
         except Exception as e:
-            print ("Error generating graph for: %s " % host)
+            print("Error generating graph for: %s " % host)
 
         try:
             cmd = r'cat %s/threatq-memory-%s.log | grep "DATE:"' % (remotepath, host)
@@ -292,7 +295,7 @@ for host in CONFIG.graphhost:
             printlog(dynamo, 'dynamo', tvalue, header)
 
         except Exception as e:
-            print ("Error generating graph for: %s " % host)
+            print("Error generating graph for: %s " % host)
 
         try:
             cmd = r'cat %s/threatq-memory-%s.log | grep "DATE:"' % (remotepath, host)
@@ -303,7 +306,7 @@ for host in CONFIG.graphhost:
             printlog(journald, 'systemd-journald', tvalue, header)
 
         except Exception as e:
-            print ("Error generating graph for: %s " % host)
+            print("Error generating graph for: %s " % host)
 
         try:
             cmd = r'cat %s/threatq-memory-%s.log | grep "DATE:"' % (remotepath, host)
@@ -314,7 +317,7 @@ for host in CONFIG.graphhost:
             printlog(mysql, 'mysqld', tvalue, header)
 
         except Exception as e:
-            print ("Error generating graph for: %s " % host)
+            print("Error generating graph for: %s " % host)
 
         try:
             cmd = r'cat %s/threatq-memory-%s.log | grep "DATE:"' % (remotepath, host)
@@ -325,7 +328,7 @@ for host in CONFIG.graphhost:
             printlog(solrmem, 'solr', tvalue, header)
 
         except Exception as e:
-            print ("Error generating graph for: %s " % host)
+            print("Error generating graph for: %s " % host)
 
         try:
             cmd = r'cat %s/threatq-memory-%s.log | grep "DATE:"' % (remotepath, host)
@@ -339,7 +342,7 @@ for host in CONFIG.graphhost:
             printlog(iostats, 'iostat', tvalue, header)
 
         except Exception as e:
-            print ("Error generating graph for: %s " % host)
+            print("Error generating graph for: %s " % host)
 
         try:
             cmd = r'cat %s/threatq-memory-%s.log | grep "DATE:"' % (remotepath, host)
@@ -350,7 +353,7 @@ for host in CONFIG.graphhost:
             printlog2(mem, 'KiB Mem', tvalue, header)
 
         except Exception as e:
-            print ("Error generating graph for: %s " % host)
+            print("Error generating graph for: %s " % host)
 
         try:
             cmd = r'cat %s/threatq-memory-%s.log | grep "DATE:"' % (remotepath, host)
@@ -361,7 +364,7 @@ for host in CONFIG.graphhost:
             printlog2(loadaverage, 'load average', tvalue, header)
 
         except Exception as e:
-            print ("Error generating graph for: %s " % host)
+            print("Error generating graph for: %s " % host)
 
         try:
             cmd = r'cat %s/threatq-memory-%s.log | grep "DATE:"' % (remotepath, host)
@@ -372,7 +375,7 @@ for host in CONFIG.graphhost:
             printlog2(httpd, 'httpd', tvalue, header)
 
         except Exception as e:
-            print ("Error generating graph for: %s " % host)
+            print("Error generating graph for: %s " % host)
 
         try:
             cmd = r'cat %s/threatq-memory-%s.log | grep "DATE:"' % (remotepath, host)
@@ -383,7 +386,7 @@ for host in CONFIG.graphhost:
             printlog(memcached, 'memcached', tvalue, header)
 
         except Exception as e:
-            print ("Error generating graph for: %s " % host)
+            print("Error generating graph for: %s " % host)
 
         try:
             cmd = r'cat %s/threatq-memory-%s.log | grep "DATE:"' % (remotepath, host)
@@ -394,7 +397,7 @@ for host in CONFIG.graphhost:
             printlog(p11211, '11211', tvalue, header)
 
         except Exception as e:
-            print ("Error generating graph for: %s " % host)
+            print("Error generating graph for: %s " % host)
 
         try:
             cmd = r'cat %s/threatq-memory-%s.log | grep "DATE:"' % (remotepath, host)
@@ -405,7 +408,7 @@ for host in CONFIG.graphhost:
             printlog(p5672, '5672', tvalue, header)
 
         except Exception as e:
-            print ("Error generating graph for: %s " % host)
+            print("Error generating graph for: %s " % host)
 
         try:
             cmd = r'cat %s/threatq-memory-%s.log | grep "DATE:"' % (remotepath, host)
@@ -416,6 +419,6 @@ for host in CONFIG.graphhost:
             printlog2(worker, 'worker', tvalue, header)
 
         except Exception as e:
-            print ("Error generating graph for: %s " % host)
+            print("Error generating graph for: %s " % host)
 
     ssh.close()

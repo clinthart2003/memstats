@@ -26,7 +26,12 @@ def printlog(memorylog, grepname, tvalue, header):
         orig_tvalue = tvalue
         if len(x) < len(tvalue):
             while len(x) != len(tvalue):
-                tvalue.pop()
+                '''
+                change pop() to pop(0) to remove the first item in the list each time.  
+                This better reflects when a metric is collected in time.  Default 
+                value for pop() is pop(-1)
+                '''
+                tvalue.pop(0)
         print("Adjusted size of tvalue: %s" % len(tvalue))
         print("")
 
@@ -126,7 +131,12 @@ def printlog2(memorylog, grepname, tvalue, header):
         orig_tvalue = tvalue
         if len(x) < len(tvalue):
             while len(x) != len(tvalue):
-                tvalue.pop()
+                '''
+                change pop() to pop(0) to remove the first item in the list each time.  
+                This better reflects when a metric is collected in time.  Default 
+                value for pop() is pop(-1)
+                '''
+                tvalue.pop(0)
         print("Adjusted size of tvalue: %s" % len(tvalue))
         print("")
 
