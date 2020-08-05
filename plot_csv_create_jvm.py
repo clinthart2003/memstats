@@ -1,5 +1,5 @@
 import paramiko
-from TQ_Setup.config import CONFIG
+from config import CONFIG
 import datetime
 import csv
 import sys, os, re
@@ -66,66 +66,6 @@ def printlog(free, usedmem, grepname, tvalue, header):
     f.close()
 
 
-def printlog2(memorylog, grepname, tvalue, header):
-    outfile = 'results/memory/%s-%s.csv' % (host, grepname)
-    listfile = []
-    with open(outfile, 'w') as f:
-        x = [line.split(',') for line in memorylog]
-
-        # Look at the difference between the number of timestamps and the
-        # number of records that were collected
-        print(grepname)
-        print("Total grepped lines: %s" % len(x))
-        print("Total Time Values: %s" % len(tvalue))
-        orig_tvalue = tvalue
-        if len(x) < len(tvalue):
-            while len(x) != len(tvalue):
-                tvalue.pop()
-        print("Adjusted size of tvalue: %s" % len(tvalue))
-        print("")
-
-        for line in x:
-            for num, cell in enumerate(line):
-                # print cell
-                if '+' in cell:
-                    line[num] = cell.replace('+', '0')
-        for line in x:
-            for num, cell in enumerate(line):
-                # print cell
-                if 'free' in cell:
-                    line[num] = cell.replace('free', '')
-        for line in x:
-            for num, cell in enumerate(line):
-                if ' used' in cell:
-                    line[num] = cell.replace('used', '')
-        for line in x:
-            for num, cell in enumerate(line):
-                if 'buff/cache' in cell:
-                    line[num] = cell.replace('buff/cache', '')
-
-        for i, line in zip(tvalue, x):
-            line.insert(0, i)
-            listfile.append(line)
-        # listfile.insert(0, header)
-        wr = csv.writer(f)
-        temp = []
-        for line in listfile:
-            if (line[0] is None) or ('"' in line[0]) or ('"' in line) or (len(line[0]) == 0) or ('bash' in line[1]):
-                print(line)
-            else:
-                temp.append(line)
-        tmp = sorted(temp, key=lambda x: datetime.datetime.strptime(x[0], '%Y-%m-%d %H:%M:%S'))
-        tmp.insert(0, header)
-        for line in tmp:
-            if (line[0] is None) or ('"' in line[0]) or ('"' in line) or (len(line[0]) == 0) or ('bash' in line[1]):
-                print(line)
-            else:
-                # wr = csv.writer(f)
-                wr.writerow(line)
-        # return tvalue time stamps to the original state
-        tvalue = orig_tvalue
-    f.close()
-
 def grep_memory(cmd, skipstring):
     """ skipsring is used to exclude any data that may alreayd be in other greps"""
 
@@ -146,45 +86,6 @@ def grep_memory(cmd, skipstring):
                     memory = freemem.split('used')
                 memorylog.append(memory[1])
 
-    return memorylog
-
-
-def grep_memory2(cmd, skipstring):
-    """ skipsring is used to exclude any data that may alreayd be in other greps"""
-
-    memorylog = []
-    stdin, stdout, stderr = ssh.exec_command(cmd)
-    exit_status = stdout.channel.recv_exit_status()
-    if exit_status == 0:
-        for line in stdout.readlines():
-            if skipstring in line:
-                continue
-            if "MB" in line:
-                continue
-            else:
-                line = ''.join(line.split('KiB Mem : '))
-                line = ','.join(line.split('total,'))
-                # line = ','.join(line.split())
-                line = ','.join(line.split(',,'))
-                # print(line)
-                memorylog.append(line.strip('\n'))
-
-    return memorylog
-
-
-def grep_memory3(cmd, skipstring):
-    """ skipsring is used to exclude any data that may alreayd be in other greps"""
-
-    memorylog = []
-    stdin, stdout, stderr = ssh.exec_command(cmd)
-    exit_status = stdout.channel.recv_exit_status()
-    if exit_status == 0:
-        for line in stdout.readlines():
-            if skipstring in line:
-                continue
-            else:
-                line = line.split('load average:')[1]
-                memorylog.append(line.strip('\n'))
     return memorylog
 
 
