@@ -1,0 +1,31 @@
+#
+# cp /tmp/qryptmemstats.service /etc/systemd/system/
+#
+# systemctl daemon-reload
+# systemctl enable qryptmemstats.service
+# systemctl start qryptmemstats.service
+#
+
+[Unit]
+Description=Take periodic memory snapshots and log them
+After=syslog.target
+
+[Service]
+Type=simple
+ExecStart=/home/admin/qryptmemstats.sh
+TimeoutStartSec=0
+Restart=on-abort
+RestartSec=5s
+
+# Number of files limit. previously [mysqld_safe] open-file-limit
+LimitNOFILE=100
+
+
+# Prevent accessing /home, /root and /run/user
+ProtectHome=false
+
+# Execute pre and post scripts as root
+PermissionsStartOnly=true
+
+[Install]
+WantedBy=multi-user.target
